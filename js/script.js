@@ -61,7 +61,7 @@ function addPagination(list) {
 
   //event listener on click of Pagination button
   linkList.addEventListener('click', (e) => {
-    if (e.path[0].tagName === 'BUTTON') {
+    if (e.target.tagName === 'BUTTON') {
       const buttons = document.getElementsByTagName('button');
 
       //loop over all buttons and remove active Class
@@ -69,10 +69,10 @@ function addPagination(list) {
         buttons[i].classList = '';
       }
       //add active class to the clicked on pagination button
-      e.path[0].classList.add('active');
+      e.target.classList.add('active');
 
       //call the showpage function using the inner html of the button clicked to identify the page number after converting it to an interger.
-      showPage(data, parseInt(e.path[0].innerHTML, 10));
+      showPage(data, parseInt(e.target.innerHTML, 10));
     }
   });
 }
