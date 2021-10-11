@@ -40,5 +40,43 @@ function showPage(list, page) {
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
+function addPagination(list) {
+  //divide the total students by students per page (9) then round up to nearest whole number using Math.ceil
+  const pageButtons = Math.ceil(list.length / 9);
+  const linkList = document.getElementsByClassName('link-list')[0];
+
+  //Remove any content already in the UL
+  linkList.innerHTML = '';
+
+  //loop over pageButtons and add a button to the HTML on each itteration
+  for (let i = 1; i <= pageButtons; i++) {
+    let button = document.createElement('li');
+    button.innerHTML = `<button type="button">${i}</button>`;
+    linkList.insertAdjacentElement('beforeend', button);
+  }
+
+  //add active status to first Pagination button
+  const firstPageButton = document.getElementsByTagName('button')[0];
+  firstPageButton.classList.add('active');
+
+  //event listener on click of Pagination button
+  linkList.addEventListener('click', (e) => {
+    if (e.path[0].tagName === 'BUTTON') {
+      const buttons = document.getElementsByTagName('button');
+
+      //loop over all buttons and remove active Class
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].classList = '';
+      }
+      //add active class to the clicked on pagination button
+      e.path[0].classList.add('active');
+
+      //call the showpage function using the inner html of the button clicked to identify the page number after converting it to an interger.
+      showPage(data, parseInt(e.path[0].innerHTML, 10));
+    }
+  });
+}
 
 // Call functions
+showPage(data, 1);
+addPagination(data);
