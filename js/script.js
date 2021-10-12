@@ -76,7 +76,27 @@ function addPagination(list) {
     }
   });
 }
+/*
+Create the `addSearch` function
+This function will create and insert the elements needed for the Search Component
+*/
+
+function addSearch() {
+  const header = document.getElementsByClassName('header')[0];
+  const searchComponent = document.createElement('label');
+  
+  searchComponent.classList.add('student-search');
+
+  searchComponent.htmlFor = 'search';
+
+  searchComponent.innerHTML = `<span>Search by name</span>
+  <input id="search" placeholder="Search by name...">
+  <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>`
+
+  header.insertAdjacentElement('beforeend', searchComponent)
+}
 
 // Call functions
 showPage(data, 1);
 addPagination(data);
+addSearch();
